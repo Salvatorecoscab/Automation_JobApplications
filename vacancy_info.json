@@ -1,14 +1,14 @@
 {
     "application": {
-        "language": "german",
+        "language": "english",
         "place_of_internship": [
-            "Munich",
-            "Bayern"
+            "Berlin",
+            "Alemania"
         ],
-        "company_name": "BMW Group",
-        "person_in_charge": "Recruiting-Team",
-        "internship_title": "Bewerbung als Praktikant - Praktikant Künstliche Intelligenz Fahrzeugfunktionen",
-        "role_activities": "Unterstützung bei der Weiterentwicklung bestehender Machine-Learning-Modelle in Python durch Integration von Kontextdaten und Personalisierung für individuelle Nutzererlebnisse. Mitwirkung bei der Analyse und dem Vergleich von Machine Learning und Large Language Models für innovative Fahrzeugfunktionen wie Ladestations- oder Parkplatzsuche. Beitrag zur Arbeit mit echten Live-Daten und Anbindung von Modellen an verschiedene Schnittstellen wie GUI, Echtzeit-Fahrzeugdaten und Datenbanken. Unterstützung des Teams dabei, Lösungen in einem Demofahrzeug erlebbar zu machen. Raum für eigene Ideen, Experimente und innovative Wege.",
-        "requirements_for_the_internship": "Studium im Bereich Informatik, Data Science, Künstliche Intelligenz oder einem vergleichbaren Studiengang. Erste praktische Erfahrung im Umgang mit Machine-Learning-Modellen oder Large Language Models. Vertrautheit mit den Grundlagen der Künstlichen Intelligenz und deren Anwendungsmöglichkeiten in der Praxis. Fähigkeit, mit Datenbanken und Schnittstellen (z. B. GUI, Echtzeitdaten) umzugehen. Mut und Motivation, eigene Ideen einzubringen und neue (technologische) Wege zu gehen. Gute Deutsch- und Englischkenntnisse."
+        "company_name": "Reonic GmbH",
+        "person_in_charge": "Udo Sill",
+        "internship_title": "Application for Internship - Founders Associate Intern - Special Projects",
+        "role_activities": "Collaborate directly with the co-founders and senior team on new digital SaaS products. Work hands-on to gather information from customers and the market. Build dashboards and analyze performance data and product usage to uncover trends, bottlenecks, and growth opportunities. Help improve cross-team alignment by creating playbooks or coordinating knowledge-sharing between departments.",
+        "requirements_for_the_internship": "Studying at a top university with strong entrepreneurial focus. Fluent in English with C2 level proficiency in German. Experience in a startup environment. Hands-on approach. Curiosity about how tech, operations, and business strategy come together in high-growth companies. Structured thinker who is not afraid to get into details, run numbers, and execute fast. Eager to invest time beyond standard hours. Available for a 4-6 month internship in the Berlin office."
     }
 }
