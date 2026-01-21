@@ -21,19 +21,13 @@ def update_csv_from_json(json_file, csv_file):
         "cover_letter_text",
     ]
 
-    # Split place_of_internship into two parts if needed
-    place = application.get("place_of_internship", "")
-    # Is a 2 element join them
-    if isinstance(place, list) and len(place) == 2:
-        place_str = ", ".join(place)
-    else:
-        place_str = place
+
 
 
     # Prepare row data
     row = {
         "language": application.get("language", ""),
-        "place_of_internship": ", ".join(application.get("place_of_internship", ["", ""])),
+        "place_of_internship": application.get("place_of_internship",""),
         "company_name": application.get("company_name", ""),
         "person_in_charge": application.get("person_in_charge", ""),
         "internship_title": application.get("internship_title", ""),
@@ -73,19 +67,12 @@ def update_csv_from_json_vacancies(json_file, csv_file):
         "requirements_for_the_internship",
     ]
 
-    # Split place_of_internship into two parts if needed
-    place = application.get("place_of_internship", "")
-    # Is a 2 element join them
-    if isinstance(place, list) and len(place) == 2:
-        place_str = ", ".join(place)
-    else:
-        place_str = place
 
 
     # Prepare row data
     row = {
         "language": application.get("language", ""),
-        "place_of_internship": ", ".join(application.get("place_of_internship", ["", ""])),
+        "place_of_internship": application.get("place_of_internship",""),
         "company_name": application.get("company_name", ""),
         "person_in_charge": application.get("person_in_charge", ""),
         "role_activities": application.get("role_activities", ""),

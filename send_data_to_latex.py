@@ -59,17 +59,11 @@ def fill_latex_main_template(json_file, template_file, output_file):
     env = get_jinja_env(template_file)
     template = env.get_template(os.path.basename(template_file))
     
-    place_raw = data.get("place_of_internship", "")
-    if place_raw[0] == "":
-        place_str = place_raw[1]
-    else:
-        place_str = " -- ".join(place_raw) if isinstance(place_raw, list) else place_raw
-
     rendered_content = template.render(
         language=data.get("language", ""),
         company_name=data.get("company_name", ""),     
         person_in_charge=data.get("person_in_charge", ""), 
-        place_of_internship=place_str
+        place_of_internship= data.get("place_of_internship", "")
     )
 
     with open(output_file, "w", encoding="utf-8") as f:

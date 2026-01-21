@@ -1,14 +1,11 @@
 {
     "application": {
-        "language": "english",
-        "place_of_internship": [
-            "Berlin",
-            ""
-        ],
-        "company_name": "Deutsche Bank AG",
-        "person_in_charge": "Recruiting-Team",
-        "internship_title": "Application for Internship - Technology, Data & Innovation",
-        "role_activities": "Work on agile projects, learn programming languages, design and develop innovative products and technical solutions using state-of-the-art software and hardware. Join teams implementing core strategic systems underpinning the bank's businesses. Explore roles in Backend, Frontend, Fullstack, DevOps, QA & Automation, Product Design (UX/UI), and Business Analysis. Gain hands-on experience with real projects, develop digital skills, and work alongside experienced engineers at the forefront of financial services innovation using cutting-edge technologies.",
-        "requirements_for_the_internship": "Studying computer science, mathematics, industrial engineering, or a comparable scientific discipline with a strong IT focus. Interest in innovative technology and financial issues. Some practical experience in programming. Well-developed communication skills and fluency in English. Responsible, committed team player with excellent analytical skills and quick grasp. Creativity and flexibility to thrive in a diverse culture."
+        "language": "german",
+        "place_of_internship": "Brema, Brema, Alemania",
+        "company_name": "ArianeGroup GmbH",
+        "person_in_charge": "",
+        "internship_title": "Praktikant im Bereich Software Engineering",
+        "role_activities": "Recherche existierender Bibliotheken mit Optimierungsalgorithmen, Umsetzung eines Optimierungsmoduls mit verschiedenen Zielfunktionen, Test am Beispiel eines Tanks aus Kohlefaserverbundwerkstoff, Aufbau automatisierter Tests zur Qualitätssicherung, Dokumentation von Programmcode nach üblichen Standards",
+        "requirements_for_the_internship": "Eingeschriebener Student im Bereich Softwaretechnik, Informatik, Maschinenbau, Luft- und Raumfahrttechnik mit Schwerpunkt Softwaretechnik, oder vergleichbar, Selbstständige, lösungsorientierte und analytische Arbeitsweise, Interesse an Luft- und Raumfahrttechnik erwünscht, Erfahrung in objektorientierter Programmierung, vorzugsweise C++, Theoretisches Wissen im Bereich FEM von Vorteil, Erfahrung im Arbeiten mit System zur Versionsverwaltung (z.B. git), Kommunikative Art zum Austausch im Team und mit den anderen Fachbereichen, Verhandlungssichere Englischkenntnisse erwünscht sowie fließende Deutschkenntnisse von Vorteil"
     }
 }

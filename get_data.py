@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 from update_csv import update_csv_from_json
 from send_data_to_latex import create_letter
-from get_vacancyinfo import process_vacancy,save_application_data
+from get_vacancyinfo import process_vacancy_json,save_application_data
 
 # Output JSON file
 OUTPUT_FILE = Path("internship_application.json")
@@ -53,14 +53,11 @@ class InternshipForm(tk.Tk):
         tk.Label(self, text="Place of internship:").grid(
             row=2, column=0, sticky="w", padx=10, pady=5
         )
-        self.place_entry1 = tk.Entry(self)
-        self.place_entry1.grid(
+        self.place_entry = tk.Entry(self)
+        self.place_entry.grid(
             row=2, column=1, sticky="ew", padx=5, pady=5
         )
-        self.place_entry2 = tk.Entry(self)
-        self.place_entry2.grid(
-            row=2, column=2, sticky="ew", padx=5, pady=5
-        )
+
 
         # Company
         tk.Label(self, text="Company name:").grid(
@@ -119,23 +116,27 @@ class InternshipForm(tk.Tk):
 
         try:
             # >>>>> CALL WILL BE ENABLED BY YOU LATER <<<<<
-            vacancy_info = process_vacancy(vacancy)
+            vacancy_info = process_vacancy_json(vacancy)
             save_application_data()
-            with open("internship_application.json", "r", encoding="utf-8") as f:
-                data = json.load(f)
-            data = data.get("application", {})
+            try:
+                with open("internship_application.json", "r", encoding="utf-8") as f:
+                    data = json.load(f)
+            except (FileNotFoundError, json.JSONDecodeError):
+                messagebox.showerror(
+                    "Invalid JSON",
+                    "internship_application.json is empty or corrupted.\n"
+                    "It will be recreated."
+                )
+                return
+
 
             if "language" in data:
                 self.language_var.set(data["language"])
 
             if "place_of_internship" in data:
-                places = data["place_of_internship"]
-                if len(places) > 0:
-                    self.place_entry1.delete(0, tk.END)
-                    self.place_entry1.insert(0, places[0])
-                if len(places) > 1:
-                    self.place_entry2.delete(0, tk.END)
-                    self.place_entry2.insert(0, places[1])
+                self.place_entry.delete(0, tk.END)
+                self.place_entry.insert(0, data["place_of_internship"])
+
 
             if "company_name" in data:
                 self.company_entry.delete(0, tk.END)
@@ -161,7 +162,7 @@ class InternshipForm(tk.Tk):
     def collect_data(self):
         return {
             "language": self.language_var.get(),
-            "place_of_internship": [self.place_entry1.get(), self.place_entry2.get()],
+            "place_of_internship":self.place_entry.get(),
             "company_name": self.company_entry.get(),
             "person_in_charge": self.person_entry.get(),
             "internship_title": self.title_entry.get(),

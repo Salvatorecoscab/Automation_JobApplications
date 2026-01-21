@@ -18,48 +18,78 @@ mockup_english = ", ".join(mockups["mockups_cover_letter"]["english"])
 # Extrae solo el texto de la lista de alemán
 mockup_german = ", ".join(mockups["mockups_cover_letter"]["german"])
 
-print(mockup_english)
-print(mockup_german)
+
 
 
 
 vacancy_rules="""
-You are a going to recieve a text and you should be able to determine the following information from it: language (either english or german) of the vacancy (the one that appears the most), place_of_internship (could be just city and postal code, this should be in the determined language (eg. Munich in english, München in german), company_name (if possible or convenient try to get the full company name, eg. Audi AG), person_in_charge (if you dont know the name just Recruiting-Team), internship_title (put in this format (if english:Application for Internship - x. if is in german: Bewerbung als Praktikant - x)), role_activities, requirements. Be descriptive in the role activities and the requirements, such as a programming language, a specific framework or anything. You should respond only with a json object with the following structure: {\n    "application": {\n        "language": "...",\n        "place_of_internship": ["...", "..."],\n        "company_name": "...",\n        "person_in_charge": "...",\n        "internship_title": "...",\n        "role_activities": "..." \n "requirements_for_the_internship": "..." \n    }\n}. If the street and number are not present in the text, you should fill it with an empty string ["street and number", "city, PC(if possuble)"]. Do not add any extra information or explanation.
+You are going to receive a text and extract the following information.
+Respond ONLY with a valid JSON object.
+
+json object format:
+{
+  "application": {
+    "language": "",
+    "place_of_internship": "",
+    "company_name": "",
+    "person_in_charge": "",
+    "internship_title": "",
+    "role_activities": "",
+    "requirements_for_the_internship": ""
+  }
+}
+
+RULES:
+- Language must be either "english" or "german"
+- If a field is missing, use an empty string
+- No explanations, no markdown, no comments
+
+ For the place if the internship use this format street, number - postal code city. if possible if not just postal code city or just the city. Remember to respond only with the json object and nothing else.
 """
 
-def process_vacancy(vacancy):
-  response_vacancy = client.chat.completions.create(
-      model="deepseek-chat",
-      messages=[
-          {"role": "system", "content": vacancy_rules},
-          {"role": "user", "content": vacancy},
-      ],
-      stream=False
-  )
-  vacancy_info = response_vacancy.choices[0].message.content
-  print("Vacancy info: "+vacancy_info)
-  # Mejora en process_vacancy para manejar respuestas que a veces no traen markdown
-  try:
-  # Intenta buscar el bloque de código
-    match = re.search(r'```json\s+(.*?)\s+```', vacancy_info, re.DOTALL)
-    json_str = match.group(1) if match else vacancy_info
+def process_vacancy_json(vacancy):
+    response_vacancy = client.chat.completions.create(
+        model="deepseek-chat",
+        messages=[
+            {"role": "system", "content": vacancy_rules},
+            {"role": "user", "content": vacancy},
+        ],
+        stream=False
+    )
+    
+    content = response_vacancy.choices[0].message.content
+    print("Respuesta de IA recibida.")
 
-    json_vacancy = json.loads(json_str)
-    if match:
-        # Convierte el texto extraído en un diccionario y lo guarda en el archivo
-        json_vacancy = json.loads(match.group(1))
+    try:
+        # 1. Extraer solo el contenido dentro de los bloques de código JSON
+        match = re.search(r'```json\s*(.*?)\s*```', content, re.DOTALL)
+        if match:
+            json_str = match.group(1).strip()
+        else:
+            # Si no hay backticks, intentamos limpiar el texto para ver si es un JSON puro
+            json_str = content.strip()
+
+        # 2. Parsear el JSON
+        json_vacancy = json.loads(json_str)
+
+        # 3. Guardar el archivo correctamente
         with open("vacancy_info.json", "w", encoding="utf-8") as f:
             json.dump(json_vacancy, f, indent=4, ensure_ascii=False)
-        print("Archivo JSON generado exitosamente.")
-    else:
-        print("No se encontró un bloque JSON válido en la respuesta.")
-        #update a csv with the vacancy info
-    update_csv_from_json_vacancies("vacancy_info.json", "vacancies.csv")
-  except json.JSONDecodeError:
-    print("Error crítico: La IA no devolvió un JSON válido.")
+        
+        print("Archivo vacancy_info.json generado exitosamente.")
+        
+        # 4. Actualizar CSV
+        update_csv_from_json_vacancies("vacancy_info.json", "vacancies.csv")
+        
+        # IMPORTANTE: Devolvemos el diccionario parseado, no el texto bruto
+        return json_vacancy
 
-  return vacancy_info
-
+    except json.JSONDecodeError as e:
+        print(f"Error crítico: La IA no devolvió un JSON válido. Detalle: {e}")
+        return None
+    except Exception as e:
+        print(f"Error inesperado: {e}")
+        return None
 def generate_coverletter():
   system_identity = (
       "You are an expert career coach helping a Computer Systems Engineering student. "
@@ -110,21 +140,24 @@ def generate_coverletter():
 
 def save_application_data():
     coverletter, json_vacancy = generate_coverletter()
-    data = {
-                "language": json_vacancy["application"].get("language", ""),
-                "place_of_internship": json_vacancy["application"].get("place_of_internship", ["", ""]),
-                "company_name": json_vacancy["application"].get("company_name", ""),
-                "person_in_charge": json_vacancy["application"].get("person_in_charge", ""),
-                "internship_title": json_vacancy["application"].get("internship_title", ""),
-                "cover_letter_text": coverletter,
-            }
-    print(data)
 
-    with open("internship_application.json", "r", encoding="utf-8") as f:
-        existing = json.load(f)
+    data = {
+        "language": json_vacancy["application"].get("language", ""),
+        "place_of_internship": json_vacancy["application"].get("place_of_internship", ""),
+        "company_name": json_vacancy["application"].get("company_name", ""),
+        "person_in_charge": json_vacancy["application"].get("person_in_charge", ""),
+        "internship_title": json_vacancy["application"].get("internship_title", ""),
+        "cover_letter_text": coverletter,
+    }
+
+    # ✔ SAFE LOAD
+    try:
+        with open("internship_application.json", "r", encoding="utf-8") as f:
+            existing = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        existing = {}
+
     existing["application"] = data
+
     with open("internship_application.json", "w", encoding="utf-8") as f:
         json.dump(existing, f, ensure_ascii=False, indent=4)
-    
-
-
