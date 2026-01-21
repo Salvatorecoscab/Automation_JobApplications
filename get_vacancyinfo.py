@@ -4,7 +4,7 @@ import os
 from openai import OpenAI
 import json
 import re
-
+from update_csv import update_csv_from_json_vacancies
 load_dotenv()
 api_key = os.getenv("DEEPSEEK_API_KEy")
 client = OpenAI(api_key=api_key, base_url="https://api.deepseek.com")
@@ -66,7 +66,7 @@ def process_vacancy(vacancy):
   response_vacancy = client.chat.completions.create(
       model="deepseek-chat",
       messages=[
-          {"role": "system", "content": "You are a going to recieve a text and you should be able to determine the following information from it: language (either english or german), place_of_internship (could be just city and postal code, this should be in the determined language. It means if the vacancy is in english, the name in english, if is in german, in german), company_name (if possible or convenient try to get the full company name, eg. Audi AG), person_in_charge (if you dont know the name just Recruiting-Team), internship_title (put in this format (if english:Application for Internship - x. if is in german: Bewerbung als Praktikant - x)), role_activities, requirements. Be descriptive in the role activities and the requirements, such as a programming language, a specific framework or anything. You should respond only with a json object with the following structure: {\n    \"application\": {\n        \"language\": \"...\",\n        \"place_of_internship\": [\"...\", \"...\"],\n        \"company_name\": \"...\",\n        \"person_in_charge\": \"...\",\n        \"internship_title\": \"...\",\n        \"role_activities\": \"...\"\n \"requirements for the internship\": \"...\"\n    }\n}. If any of the fields is not present in the text, you should fill it with an empty string or an array with two empty strings for place_of_internship. Do not add any extra information or explanation."},
+          {"role": "system", "content": "You are a going to recieve a text and you should be able to determine the following information from it: language (either english or german), place_of_internship (could be just city and postal code, this should be in the determined language. It means if the vacancy is in english, the name in english, if is in german, in german), company_name (if possible or convenient try to get the full company name, eg. Audi AG), person_in_charge (if you dont know the name just Recruiting-Team), internship_title (put in this format (if english:Application for Internship - x. if is in german: Bewerbung als Praktikant - x)), role_activities, requirements. Be descriptive in the role activities and the requirements, such as a programming language, a specific framework or anything. You should respond only with a json object with the following structure: {\n    \"application\": {\n        \"language\": \"...\",\n        \"place_of_internship\": [\"...\", \"...\"],\n        \"company_name\": \"...\",\n        \"person_in_charge\": \"...\",\n        \"internship_title\": \"...\",\n        \"role_activities\": \"...\"\n \"requirements_for_the_internship\": \"...\"\n    }\n}. If any of the fields is not present in the text, you should fill it with an empty string or an array with two empty strings for place_of_internship. Do not add any extra information or explanation."},
           {"role": "user", "content": vacancy},
       ],
       stream=False
@@ -83,6 +83,9 @@ def process_vacancy(vacancy):
     print("Archivo JSON generado exitosamente.")
   else:
       print("No se encontró un bloque JSON válido en la respuesta.")
+    #update a csv with the vacancy info
+  update_csv_from_json_vacancies("vacancy_info.json", "vacancies.csv")
+
   return vacancy_info
 
 def generate_coverletter():
