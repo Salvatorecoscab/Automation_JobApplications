@@ -24,7 +24,7 @@ print(mockup_german)
 
 
 vacancy_rules="""
-You are a going to recieve a text and you should be able to determine the following information from it: language (either english or german), place_of_internship (could be just city and postal code, this should be in the determined language. It means if the vacancy is in english, the name in english, if is in german, in german), company_name (if possible or convenient try to get the full company name, eg. Audi AG), person_in_charge (if you dont know the name just Recruiting-Team), internship_title (put in this format (if english:Application for Internship - x. if is in german: Bewerbung als Praktikant - x)), role_activities, requirements. Be descriptive in the role activities and the requirements, such as a programming language, a specific framework or anything. You should respond only with a json object with the following structure: {\n    "application": {\n        "language": "...",\n        "place_of_internship": ["...", "..."],\n        "company_name": "...",\n        "person_in_charge": "...",\n        "internship_title": "...",\n        "role_activities": "..." \n "requirements_for_the_internship": "..." \n    }\n}. If any of the fields is not present in the text, you should fill it with an empty string or an array with two empty strings for place_of_internship. Do not add any extra information or explanation.
+You are a going to recieve a text and you should be able to determine the following information from it: language (either english or german) of the vacancy (the one that appears the most), place_of_internship (could be just city and postal code, this should be in the determined language (eg. Munich in english, München in german), company_name (if possible or convenient try to get the full company name, eg. Audi AG), person_in_charge (if you dont know the name just Recruiting-Team), internship_title (put in this format (if english:Application for Internship - x. if is in german: Bewerbung als Praktikant - x)), role_activities, requirements. Be descriptive in the role activities and the requirements, such as a programming language, a specific framework or anything. You should respond only with a json object with the following structure: {\n    "application": {\n        "language": "...",\n        "place_of_internship": ["...", "..."],\n        "company_name": "...",\n        "person_in_charge": "...",\n        "internship_title": "...",\n        "role_activities": "..." \n "requirements_for_the_internship": "..." \n    }\n}. If the street and number are not present in the text, you should fill it with an empty string ["street and number", "city, PC(if possuble)"]. Do not add any extra information or explanation.
 """
 
 def process_vacancy(vacancy):
@@ -82,23 +82,29 @@ def generate_coverletter():
   else:   
       print("The vacancy is in english")
       mockups=mockup_english
-  instructions_coverletter="""
-      Based on this CV:"""+cv+"""
-     
-  and based on this vacancy: """+vacancy_info+"""
-  write a cover letter in the language from the vacancy based on this sketchups use this structure as reference: """+mockups+"""  . Make sure to include role activities and requirements from the vacancy in the letter. The letter should be formal and convincing, highlighting relevant skills and experiences from the CV that match the internship requirements. The letter should be around 350-400 words. dont add the tittle of the letter, just start with the greeting. dont add any special characters or markdown, just plain text. dont add the farewell to the letter. Dont lie about the CV information, only use what is in there. eg dont say you know a programming language if is not in the CV or say I can speak a language if is not in the CV. Language  German and English B2 are important. Include them if you do not find a required ability don't include it.
-
-  """
-  response_coverletter = client.chat.completions.create(
-      model="deepseek-chat",
-      messages=[
-          {"role": "system", "content": system_identity},
-          {"role": "user", "content": instructions_coverletter},
-      ],
-      stream=False
-      
+  # Define strict rules separately
+  prompt_rules = (
+    f"TASK: Write a cover letter in {vacancy_language}.\n"
+    "CONSTRAINTS:\n"
+    "- LENGTH: 350-400 words.\n"
+    "- STYLE: Match the provided mockups.\n"
+    "- NO HALLUCINATIONS: Do not mention skills not in the CV. If a skill is missing, say 'I am    willing to learn'.\n"
+    "- FORMAT: Plain text only. No markdown, no title, no farewell.\n"
+    f"- REFERENCE MOCKUPS: {mockups}"
   )
-  coverletter = response_coverletter.choices[0].message.content
+
+  messages = [
+      {"role": "system", "content": system_identity},
+      {"role": "user", "content": f"STRICT RULES:\n{prompt_rules}"},
+      {"role": "user", "content": f"STUDENT CV (FACTS ONLY):\n{cv}"},
+      {"role": "user", "content": f"TARGET VACANCY:\n{vacancy_info}"},
+  ]
+  response = client.chat.completions.create(
+        model="deepseek-chat",
+        messages=messages,
+        temperature=0.3 # Lower temperature reduces "creativity" (hallucinations)
+)
+  coverletter = response.choices[0].message.content
   print("Generated Cover Letter: "+coverletter)
   return coverletter, json_vacancy
 
