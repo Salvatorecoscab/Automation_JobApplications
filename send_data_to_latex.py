@@ -2,9 +2,13 @@ import subprocess
 import os
 import json
 from jinja2 import Environment, FileSystemLoader
+import re
 def escape_latex(text):
-    replacements = {
-        '\\': r'\textbackslash{}',
+    if not isinstance(text, str):
+        return text
+
+    # Diccionario de mapeo
+    conv = {
         '&': r'\&',
         '%': r'\%',
         '$': r'\$',
@@ -14,10 +18,15 @@ def escape_latex(text):
         '}': r'\}',
         '~': r'\textasciitilde{}',
         '^': r'\textasciicircum{}',
+        '\\': r'\textbackslash{}',
     }
-    for k, v in replacements.items():
-        text = text.replace(k, v)
-    return text
+
+    # Creamos una expresión regular que busca cualquiera de estos caracteres.
+    # El orden en el re.escape es vital, y usar re.compile mejora el rendimiento.
+    regex = re.compile('|'.join(re.escape(str(key)) for key in conv.keys()))
+    
+    # La magia: cada coincidencia se reemplaza solo una vez.
+    return regex.sub(lambda mo: conv[mo.group()], text)
 def sanitize_for_latex(obj):
     if isinstance(obj, dict):
         return {k: sanitize_for_latex(v) for k, v in obj.items()}
@@ -25,8 +34,7 @@ def sanitize_for_latex(obj):
         return [sanitize_for_latex(v) for v in obj]
     elif isinstance(obj, str):
         return escape_latex(obj)
-    else:
-        return obj
+    return obj
 
 def read_json(json_file):
     with open(json_file, "r", encoding="utf-8") as f:
@@ -68,17 +76,17 @@ def fill_latex_main_template(json_file, template_file, output_file):
         f.write(rendered_content)
 
 def fill_latex_letter_template(json_file, template_file, output_file):
+    # read_json ya devuelve los datos escapados correctamente
     data = read_json(json_file)["application"]
     env = get_jinja_env(template_file)
     template = env.get_template(os.path.basename(template_file))
 
-    # Procesar saltos de línea para LaTeX
-    cover_letter_raw = data.get("cover_letter_text", "")
-    cover_letter_escaped = escape_latex(cover_letter_raw)
+    # Obtenemos el texto que ya fue escapado en read_json
+    cover_letter_escaped = data.get("cover_letter_text", "")
     cover_letter_processed = cover_letter_escaped.replace("\n", " \\\\ ")
 
-    
     rendered_content = template.render(
+        # Internship_title también viene ya escapado de read_json
         title=data.get("internship_title", ""),  
         coverletter=cover_letter_processed      
     )
@@ -123,6 +131,10 @@ def create_letter():
                     "Job_Application_letter/Txt/Application-letter.tex")
 
     generate_pdf(lang)
+    # open the generated PDF
+    target_name = "Anschreiben.pdf" if lang == "german" else "Cover_Letter.pdf"
+    subprocess.run(["open", target_name])
+    
 
 if __name__ == "__main__":
     create_letter()

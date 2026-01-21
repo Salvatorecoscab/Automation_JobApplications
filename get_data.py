@@ -188,6 +188,7 @@ class InternshipForm(tk.Tk):
             update_csv_from_json(OUTPUT_FILE, OUTPUT_CSV)
             create_letter()
 
+
         except Exception as e:
             messagebox.showerror("Error", f"Could not save data:\n{e}")
 

@@ -1,14 +1,14 @@
 {
     "application": {
-        "language": "english",
+        "language": "german",
         "place_of_internship": [
-            "Berlin",
-            "Alemania"
+            "Ludwigshafen am Rhein",
+            "Renania-Palatinado, Alemania"
         ],
-        "company_name": "Reonic GmbH",
-        "person_in_charge": "Udo Sill",
-        "internship_title": "Application for Internship - Founders Associate Intern - Special Projects",
-        "role_activities": "Collaborate directly with the co-founders and senior team on new digital SaaS products. Work hands-on to gather information from customers and the market. Build dashboards and analyze performance data and product usage to uncover trends, bottlenecks, and growth opportunities. Help improve cross-team alignment by creating playbooks or coordinating knowledge-sharing between departments.",
-        "requirements_for_the_internship": "Studying at a top university with strong entrepreneurial focus. Fluent in English with C2 level proficiency in German. Experience in a startup environment. Hands-on approach. Curiosity about how tech, operations, and business strategy come together in high-growth companies. Structured thinker who is not afraid to get into details, run numbers, and execute fast. Eager to invest time beyond standard hours. Available for a 4-6 month internship in the Berlin office."
+        "company_name": "Computacenter",
+        "person_in_charge": "Recruiting-Team",
+        "internship_title": "Bewerbung als Praktikant - Trainee IT Consulting - Workplace w/m/d",
+        "role_activities": "Die Umsetzung innovativer Lösungen mit modernsten Technologien von Microsoft oder Apple, wie zum Beispiel Azure, Microsoft 365, Windows 11 und MacOS. Die Digitalisierung des Arbeitsplatzes, durch das Installieren und Optimieren der benötigten Technologien von physikalischen und virtuellen Desktops bis hin zu Netzwerkkonnektivität, Enterprise-Mobility-Plattformen und Cloud-Anwendungen. Devices verschiedenster Hersteller und ihr Management bis hin zu Use Cases für Wearable Devices im Industrie-4.0-Umfeld. Themen wie Video Conferencing, die Zusammenarbeit über soziale Medien oder IP-Telefonie im Schwerpunkt Unified Communication & Collaboration.",
+        "requirements_for_the_internship": "Relevante IT (Hochschul-) Ausbildung – auch Quereinsteiger:innen mit sehr guten IT-Grundkenntnissen sind herzlich willkommen! Praxiserfahrungen mit Microsoft-, Apple-Produkten sowie Power Platform. Beratungsaffinität und kommunikative Fähigkeiten. Sehr gute Deutsch- und Englischkenntnisse. Reisebereitschaft."
     }
 }
