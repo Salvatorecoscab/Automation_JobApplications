@@ -1,0 +1,13 @@
+{
+    "application": {
+        "language": "german",
+        "place_of_internship": [
+            "Munich",
+            "Bayern"
+        ],
+        "company_name": "BMW Group",
+        "person_in_charge": "Recruiting-Team",
+        "internship_title": "Bewerbung als Praktikant - Praktikant Künstliche Intelligenz Fahrzeugfunktionen",
+        "cover_letter_text": "Sehr geehrtes Recruiting-Team,\n\nmit großem Interesse habe ich Ihre Ausschreibung für das Praktikum im Bereich Künstliche Intelligenz Fahrzeugfunktionen bei der BMW Group in München gelesen. Als DAAD-KOSPIE-Stipendiat und Student der Technischen Informatik mit Schwerpunkt auf KI und Robotik suche ich für den Zeitraum ab März 2026 ein sechsmonatiges Pflichtpraktikum. Die Möglichkeit, an der Weiterentwicklung innovativer Fahrzeugfunktionen mitzuwirken, motiviert mich außerordentlich.\n\nMein Studium an der ESCOM in Mexiko und meine Austauschsemester an deutschen Hochschulen haben einen starken Fokus auf Künstliche Intelligenz, Maschinelles Lernen und Robotik gelegt. In Projekten wie „NAOimitationv2“ für die Bewegungsimitation eines Roboters oder „MLChords“ zur Akkorderkennung mit YOLOv8 habe ich praktische Erfahrungen in der Entwicklung und Anwendung von ML-Modellen gesammelt, insbesondere mit Python, OpenCV und Computer-Vision-Bibliotheken. Diese Projekte haben mir gezeigt, wie wichtig die Integration verschiedener Datenquellen und Schnittstellen ist – eine Kernaufgabe, die auch in Ihrer Stellenbeschreibung genannt wird.\n\nIn meiner Tätigkeit als Werkstudent im DevOps-Bereich bei Ford Motor Company habe ich zudem wertvolle Erfahrungen in der Automatisierung von Prozessen, der Arbeit mit CI/CD-Pipelines und der Anbindung von Tools über APIs gesammelt. Dies hat mein Verständnis für stabile Softwareentwicklung und die effiziente Verknüpfung von Systemen geschärft. Ich bin es gewohnt, mich schnell in neue Tech-Stacks einzuarbeiten und bringe die von Ihnen geforderte Motivation mit, eigene Ideen und experimentelle Ansätze einzubringen.\n\nMit meinen fließenden Deutsch- und Englischkenntnissen sowie meiner Erfahrung in interkulturellen Teams kann ich mich von Beginn an effektiv in Ihr Team einbringen. Ein Umzug nach München für die Dauer des Praktikums ist für mich selbstverständlich. Ich freue mich sehr auf die Möglichkeit, mein Wissen in Machine Learning und meine Begeisterung für innovative Technologien in Ihr Team einzubringen."
+    }
+}

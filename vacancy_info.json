@@ -1,0 +1,14 @@
+{
+    "application": {
+        "language": "german",
+        "place_of_internship": [
+            "Munich",
+            "Bayern"
+        ],
+        "company_name": "BMW Group",
+        "person_in_charge": "Recruiting-Team",
+        "internship_title": "Bewerbung als Praktikant - Praktikant Künstliche Intelligenz Fahrzeugfunktionen",
+        "role_activities": "Unterstützung bei der Weiterentwicklung bestehender Machine-Learning-Modelle in Python durch Integration von Kontextdaten und Personalisierung für individuelle Nutzererlebnisse. Mitwirkung bei der Analyse und dem Vergleich von Machine Learning und Large Language Models für innovative Fahrzeugfunktionen wie Ladestations- oder Parkplatzsuche. Beitrag zur Arbeit mit echten Live-Daten und Anbindung von Modellen an verschiedene Schnittstellen wie GUI, Echtzeit-Fahrzeugdaten und Datenbanken. Unterstützung des Teams dabei, Lösungen in einem Demofahrzeug erlebbar zu machen. Raum für eigene Ideen, Experimente und innovative Wege.",
+        "requirements for the internship": "Studium im Bereich Informatik, Data Science, Künstliche Intelligenz oder einem vergleichbaren Studiengang. Erste praktische Erfahrung im Umgang mit Machine-Learning-Modellen oder Large Language Models. Vertrautheit mit den Grundlagen der Künstlichen Intelligenz und deren Anwendungsmöglichkeiten in der Praxis. Fähigkeit, mit Datenbanken und Schnittstellen (z. B. GUI, Echtzeitdaten) umzugehen. Mut und Motivation, eigene Ideen einzubringen und neue (technologische) Wege zu gehen. Gute Deutsch- und Englischkenntnisse."
+    }
+}
