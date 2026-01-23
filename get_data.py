@@ -116,11 +116,11 @@ class InternshipForm(tk.Tk):
 
         try:
             # >>>>> CALL WILL BE ENABLED BY YOU LATER <<<<<
-            vacancy_info = process_vacancy_json(vacancy)
-            save_application_data()
             try:
+                vacancy_info = process_vacancy_json(vacancy)
+                save_application_data()
                 with open("internship_application.json", "r", encoding="utf-8") as f:
-                    data = json.load(f)
+                    full_data = json.load(f)
             except (FileNotFoundError, json.JSONDecodeError):
                 messagebox.showerror(
                     "Invalid JSON",
@@ -128,7 +128,7 @@ class InternshipForm(tk.Tk):
                     "It will be recreated."
                 )
                 return
-
+            data = full_data.get("application", {})
 
             if "language" in data:
                 self.language_var.set(data["language"])

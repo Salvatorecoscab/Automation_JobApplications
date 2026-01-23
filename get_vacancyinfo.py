@@ -43,7 +43,7 @@ RULES:
 - Language must be either "english" or "german"
 - If a field is missing, use an empty string
 - No explanations, no markdown, no comments
-
+- Translate the name of the place to english or german depending on the language of the vacancy
  For the place if the internship use this format street, number - postal code city. if possible if not just postal code city or just the city. Remember to respond only with the json object and nothing else.
 """
 

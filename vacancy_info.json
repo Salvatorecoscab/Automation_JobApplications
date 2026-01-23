@@ -1,11 +1,11 @@
 {
     "application": {
         "language": "german",
-        "place_of_internship": "Brema, Brema, Alemania",
-        "company_name": "ArianeGroup GmbH",
-        "person_in_charge": "",
-        "internship_title": "Praktikant im Bereich Software Engineering",
-        "role_activities": "Recherche existierender Bibliotheken mit Optimierungsalgorithmen, Umsetzung eines Optimierungsmoduls mit verschiedenen Zielfunktionen, Test am Beispiel eines Tanks aus Kohlefaserverbundwerkstoff, Aufbau automatisierter Tests zur Qualitätssicherung, Dokumentation von Programmcode nach üblichen Standards",
-        "requirements_for_the_internship": "Eingeschriebener Student im Bereich Softwaretechnik, Informatik, Maschinenbau, Luft- und Raumfahrttechnik mit Schwerpunkt Softwaretechnik, oder vergleichbar, Selbstständige, lösungsorientierte und analytische Arbeitsweise, Interesse an Luft- und Raumfahrttechnik erwünscht, Erfahrung in objektorientierter Programmierung, vorzugsweise C++, Theoretisches Wissen im Bereich FEM von Vorteil, Erfahrung im Arbeiten mit System zur Versionsverwaltung (z.B. git), Kommunikative Art zum Austausch im Team und mit den anderen Fachbereichen, Verhandlungssichere Englischkenntnisse erwünscht sowie fließende Deutschkenntnisse von Vorteil"
+        "place_of_internship": "Jena, Turingia, Germany",
+        "company_name": "ZEISS Group",
+        "person_in_charge": "ZEISS Recruiting Team",
+        "internship_title": "Praktikum im Bereich Embedded Software für Refraktive Laser (m/w/x)",
+        "role_activities": "Erstellung eines Embedded Linux (RT) images mit yocto für eine bestehende Hardware; Vergleich der Echtzeitfähigkeit von QNX und Embedded Linux (RT), dazu Definition von Kriterien für die Echtzeitfähigkeit eines Systems; Schaffen eines Setups zur Messung der Reaktionszeiten auf Interrupts (auch unter Lastsituation); Dokumentation der Arbeitsergebnisse und Erstellung eines Berichts zum Vergleich von QNX und Linux",
+        "requirements_for_the_internship": "Studium im Bereich Ingenieurwissenschaften, idealerweise Informatik oder einer vergleichbaren Fachrichtung; Kenntnisse in yocto und Embedded Linux; Programmierkenntnisse in C und C++; Wünschenswert sind Kenntnisse in Linux / Treiberentwicklung (PCI-Express); Methodische und strukturierte Arbeitsweise sowie analytisches Denken; Gute Organisations- und Kommunikationsfähigkeit; Gute Deutsch- und Englischkenntnisse"
     }
 }
